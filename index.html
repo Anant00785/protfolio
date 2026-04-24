@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Anant Kumar Tanti — CSE Student, Frontend Developer, AI/ML Enthusiast & Co-Founder at Infosventra.">
+  <title>Anant Kumar Tanti | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── Lab Background ── -->
+<div class="lab-bg"></div>
+<canvas id="particleCanvas"></canvas>
+
+<!-- ══════════════════════════════
+     JARVIS AI ASSISTANT
+══════════════════════════════ -->
+<div class="jarvis-bubble" id="jarvisBubble" aria-label="Open J.A.R.V.I.S. assistant">
+  <div class="jarvis-rings">
+    <span class="jr jr1"></span>
+    <span class="jr jr2"></span>
+    <span class="jr jr3"></span>
+  </div>
+  <svg class="jarvis-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+    <!-- brain/AI symbol -->
+    <circle cx="30" cy="30" r="14" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="30" cy="30" r="5" fill="currentColor" opacity="0.9"/>
+    <line x1="30" y1="16" x2="30" y2="8" stroke="currentColor" stroke-width="2"/>
+    <line x1="44" y1="22" x2="51" y2="18" stroke="currentColor" stroke-width="2"/>
+    <line x1="44" y1="38" x2="51" y2="42" stroke="currentColor" stroke-width="2"/>
+    <line x1="30" y1="44" x2="30" y2="52" stroke="currentColor" stroke-width="2"/>
+    <line x1="16" y1="38" x2="9" y2="42" stroke="currentColor" stroke-width="2"/>
+    <line x1="16" y1="22" x2="9" y2="18" stroke="currentColor" stroke-width="2"/>
+    <circle cx="30" cy="8" r="2.5" fill="currentColor"/>
+    <circle cx="51" cy="18" r="2.5" fill="currentColor"/>
+    <circle cx="51" cy="42" r="2.5" fill="currentColor"/>
+    <circle cx="30" cy="52" r="2.5" fill="currentColor"/>
+    <circle cx="9" cy="42" r="2.5" fill="currentColor"/>
+    <circle cx="9" cy="18" r="2.5" fill="currentColor"/>
+  </svg>
+  <span class="jarvis-tag">J.A.R.V.I.S</span>
+</div>
+
+<div class="jarvis-panel" id="jarvisPanel">
+  <div class="jp-header">
+    <div class="jp-logo">J.A.R.V.I.S.</div>
+    <div class="jp-subtitle">Just A Rather Very Intelligent System</div>
+    <button class="jp-close" id="jpClose" aria-label="Close">✕</button>
+  </div>
+  <div class="jp-screen">
+    <div class="jp-output" id="jpOutput"></div>
+    <div class="jp-wave">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="jp-commands">
+    <button class="jp-cmd" data-section="hero">HOME</button>
+    <button class="jp-cmd" data-section="about">ABOUT</button>
+    <button class="jp-cmd" data-section="experience">EXP</button>
+    <button class="jp-cmd" data-section="projects">PROJECTS</button>
+    <button class="jp-cmd" data-section="skills">SKILLS</button>
+    <button class="jp-cmd" data-section="roadmap">ROADMAP</button>
+    <button class="jp-cmd" data-section="contact">CONTACT</button>
+  </div>
+  <div class="jp-input-row">
+    <input type="text" id="jpInput" class="jp-input" placeholder="Ask me anything..." autocomplete="off"/>
+    <button class="jp-send" id="jpSend" aria-label="Send">▶</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     ROBOT SOCIAL FAB
+══════════════════════════════ -->
+<div class="robot-fab" id="robotFab" aria-label="Open social links">
+  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <rect x="16" y="10" width="32" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="24" cy="20" r="4" fill="currentColor" opacity="0.8"/>
+    <circle cx="40" cy="20" r="4" fill="currentColor" opacity="0.8"/>
+    <circle cx="24" cy="20" r="2" fill="#fff"/>
+    <circle cx="40" cy="20" r="2" fill="#fff"/>
+    <rect x="22" y="28" width="20" height="4" rx="2" fill="currentColor" opacity="0.6"/>
+    <line x1="32" y1="10" x2="32" y2="4" stroke="currentColor" stroke-width="2"/>
+    <circle cx="32" cy="3" r="2" fill="currentColor"/>
+    <rect x="20" y="36" width="24" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="26" y="41" width="12" height="8" rx="2" fill="currentColor" opacity="0.3"/>
+    <rect x="8" y="37" width="10" height="6" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+    <rect x="46" y="37" width="10" height="6" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+  </svg>
+  <div class="robot-pulse"></div>
+</div>
+
+<div class="social-panel" id="socialPanel">
+  <div class="panel-header">
+    <span>UPLINK CHANNELS</span>
+    <button class="panel-close" id="panelClose">×</button>
+  </div>
+  <div class="panel-links">
+    <a href="https://wa.me/916290542056" target="_blank" class="panel-link whatsapp">
+      <div class="panel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+      <span>WhatsApp</span>
+    </a>
+    <a href="https://www.linkedin.com/in/anant-kumar-tanti-8a0420316" target="_blank" class="panel-link linkedin">
+      <div class="panel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+      <span>LinkedIn</span>
+    </a>
+    <a href="https://instagram.com/anant00785" target="_blank" class="panel-link instagram">
+      <div class="panel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+      <span>Instagram</span>
+    </a>
+    <a href="https://github.com/Anant00785" target="_blank" class="panel-link github">
+      <div class="panel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div>
+      <span>GitHub</span>
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="logo">AKT<span class="text-orange">.EXE</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero">HOME</a></li>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#experience">EXP</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="#roadmap">ROADMAP</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section id="hero" class="hero">
+  <div class="arc-wrapper">
+    <div class="arc-reactor">
+      <div class="core-glow"></div>
+      <div class="core"></div>
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+      <div class="orbit-dots" id="orbitDots"></div>
+    </div>
+  </div>
+
+  <div class="hero-split">
+    <div class="hero-content">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        SYSTEM ONLINE — ALL MODULES ACTIVE
+      </div>
+      <div class="boot-line" id="bootLine">INITIALIZING CORE...</div>
+      <h1 class="typing-container">
+        <span id="typing-text"></span><span class="cursor">_</span>
+      </h1>
+      <h2 class="hero-name">Anant Kumar Tanti</h2>
+      <p class="hero-tagline">
+        <span class="tg-item">Frontend Developer</span>
+        <span class="tg-sep">|</span>
+        <span class="tg-item">AI/ML Enthusiast</span>
+        <span class="tg-sep">|</span>
+        <span class="tg-item text-orange">Co-Founder @ Infosventra</span>
+      </p>
+      <p class="hero-sub">Building digital solutions and helping businesses go online.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          PROJECTS
+        </a>
+        <a href="#experience" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          EXPERIENCE
+        </a>
+        <a href="https://github.com/Anant00785" target="_blank" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GITHUB
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="suit-frame">
+        <div class="suit-scan"></div>
+        <img src="/robot_suit.png" alt="Futuristic exoskeleton" class="suit-img"/>
+        <div class="suit-overlay"></div>
+        <div class="suit-corner s-tl"></div>
+        <div class="suit-corner s-tr"></div>
+        <div class="suit-corner s-bl"></div>
+        <div class="suit-corner s-br"></div>
+        <div class="suit-hud">
+          <div class="hud-line"><span>NAME</span><span>ANANT KUMAR TANTI</span></div>
+          <div class="hud-line"><span>ROLE</span><span class="text-orange">CO-FOUNDER / DEV</span></div>
+          <div class="hud-line"><span>STATUS</span><span class="text-green">● ACTIVE</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     ABOUT
+══════════════════════════════ -->
+<section id="about" class="section">
+  <div class="section-header">
+    <span class="section-tag">MODULE_01</span>
+    <h2 class="section-title" data-text="ABOUT">ABOUT</h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-visual">
+      <div class="holo-frame">
+        <div class="holo-scan"></div>
+        <img src="/robot_suit.png" alt="Anant Kumar Tanti" class="holo-img"/>
+        <div class="holo-overlay"></div>
+        <div class="holo-corner tl"></div>
+        <div class="holo-corner tr"></div>
+        <div class="holo-corner bl"></div>
+        <div class="holo-corner br"></div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="id-card">
+        <div class="id-row"><span class="id-label">NAME</span><span class="id-value">Anant Kumar Tanti</span></div>
+        <div class="id-row"><span class="id-label">DEGREE</span><span class="id-value text-blue">B.Tech CSE — Narula Institute of Technology</span></div>
+        <div class="id-row"><span class="id-label">VENTURE</span><span class="id-value text-orange">Co-Founder @ Infosventra</span></div>
+        <div class="id-row"><span class="id-label">STATUS</span><span class="id-value"><span class="status-dot"></span> OPERATIONAL</span></div>
+      </div>
+      <p class="about-bio">Passionate Computer Science Engineering student at Narula Institute of Technology, Kolkata. I live at the intersection of elegant frontend design and intelligent systems — crafting user-centric web products and exploring the capabilities of AI/ML.</p>
+      <p class="about-bio">As Co-Founder of <strong class="text-orange">Infosventra</strong>, I help businesses establish their digital presence — from UI design and full-stack development to cloud deployment and SSL configuration.</p>
+      <p class="about-bio">My focus: building practical, scalable applications that solve real-world problems.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num">3+</div><div class="stat-label">YEARS</div></div>
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">PROJECTS</div></div>
+        <div class="stat"><div class="stat-num">4+</div><div class="stat-label">ROLES</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">CURIOSITY</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     EXPERIENCE
+══════════════════════════════ -->
+<section id="experience" class="section">
+  <div class="section-header">
+    <span class="section-tag">MODULE_02</span>
+    <h2 class="section-title" data-text="EXPERIENCE">EXPERIENCE</h2>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="tl-marker">
+        <div class="tl-dot orange-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-role">Co-Founder & Developer</div>
+          <div class="tl-badge badge-orange">CURRENT</div>
+        </div>
+        <div class="tl-company">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          Infosventra — Digital Solutions Startup
+        </div>
+        <ul class="tl-list">
+          <li>Helping businesses establish and scale their online presence</li>
+          <li>Full-stack development: UI design, frontend & backend, deployment</li>
+          <li>Configured hosting infrastructure, domains, and SSL certificates</li>
+          <li>Client-facing product delivery from concept to production</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tag t-orange">React</span>
+          <span class="tag t-blue">Node.js</span>
+          <span class="tag t-orange">AWS/Hosting</span>
+          <span class="tag t-blue">SSL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal" style="--delay:0.15s">
+      <div class="tl-marker">
+        <div class="tl-dot blue-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-role">AI/ML Intern</div>
+          <div class="tl-badge badge-blue">INTERNSHIP</div>
+        </div>
+        <div class="tl-company">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          EISystems × IIT BHU Technex
+        </div>
+        <ul class="tl-list">
+          <li>Developed an Area Price Prediction ML model using historical data</li>
+          <li>Applied regression algorithms with feature engineering pipelines</li>
+          <li>Worked with NumPy, Pandas, and Scikit-learn for data processing</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tag t-blue">Python</span>
+          <span class="tag t-orange">Scikit-learn</span>
+          <span class="tag t-blue">Pandas</span>
+          <span class="tag t-orange">ML</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal" style="--delay:0.3s">
+      <div class="tl-marker">
+        <div class="tl-dot orange-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-role">Associate (Apprenticeship)</div>
+          <div class="tl-badge badge-orange">APPRENTICE</div>
+        </div>
+        <div class="tl-company">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          Oracle Corporation
+        </div>
+        <ul class="tl-list">
+          <li>Enterprise-grade tech apprenticeship program</li>
+          <li>Exposure to Oracle technologies, enterprise software ecosystem</li>
+          <li>Collaboration in a professional technical environment</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tag t-blue">Oracle</span>
+          <span class="tag t-orange">Enterprise Tech</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal" style="--delay:0.45s">
+      <div class="tl-marker">
+        <div class="tl-dot blue-dot"></div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-top">
+          <div class="tl-role">Community Member</div>
+          <div class="tl-badge badge-blue">COMMUNITY</div>
+        </div>
+        <div class="tl-company">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 012-2h6a2 2 0 012 2v1.662"/></svg>
+          GDG Kolkata — Google Developer Groups
+        </div>
+        <ul class="tl-list">
+          <li>Active member of Kolkata's Google Developers community</li>
+          <li>Participates in workshops, DevFests, and tech meetups</li>
+          <li>Networking with developers across the local tech ecosystem</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tag t-blue">Google</span>
+          <span class="tag t-orange">Community</span>
+          <span class="tag t-blue">Events</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     PROJECTS
+══════════════════════════════ -->
+<section id="projects" class="section">
+  <div class="section-header">
+    <span class="section-tag">MODULE_03</span>
+    <h2 class="section-title" data-text="PROJECTS">PROJECTS</h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="card-num">01</div>
+      <div class="card-top-row">
+        <div class="card-icon orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <span class="card-status active">DEPLOYED</span>
+      </div>
+      <h3>Style Space</h3>
+      <p>Custom product platform with real-time preview — allows users to visualize customizable products before purchase. Built for a fashion/lifestyle brand.</p>
+      <div class="tags">
+        <span class="tag t-orange">React</span>
+        <span class="tag t-blue">CSS</span>
+        <span class="tag t-orange">Real-time Preview</span>
+        <span class="tag t-blue">Node.js</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Anant00785" target="_blank" class="card-link">VIEW CODE →</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--delay:0.12s">
+      <div class="card-num">02</div>
+      <div class="card-top-row">
+        <div class="card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <span class="card-status active">DEPLOYED</span>
+      </div>
+      <h3>Marble E-Commerce</h3>
+      <p>Full-featured e-commerce platform for a marble & stone products business — built with responsive UI, product catalogue, and contact integration.</p>
+      <div class="tags">
+        <span class="tag t-blue">HTML/CSS</span>
+        <span class="tag t-orange">JavaScript</span>
+        <span class="tag t-blue">E-Commerce</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Anant00785" target="_blank" class="card-link">VIEW CODE →</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--delay:0.24s">
+      <div class="card-num">03</div>
+      <div class="card-top-row">
+        <div class="card-icon orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+        </div>
+        <span class="card-status beta">LIVE</span>
+      </div>
+      <h3>Weather App (React)</h3>
+      <p>Real-time weather application built with React, consuming OpenWeatherMap API with dynamic backgrounds, city search, and temperature unit toggle.</p>
+      <div class="tags">
+        <span class="tag t-orange">React</span>
+        <span class="tag t-blue">API</span>
+        <span class="tag t-orange">OpenWeather</span>
+        <span class="tag t-blue">Hooks</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Anant00785" target="_blank" class="card-link">VIEW CODE →</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="--delay:0.36s">
+      <div class="card-num">04</div>
+      <div class="card-top-row">
+        <div class="card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <span class="card-status wip">ML</span>
+      </div>
+      <h3>Area Price Prediction</h3>
+      <p>Machine learning model to predict real estate area prices using regression techniques. Features data preprocessing, feature engineering, and model evaluation.</p>
+      <div class="tags">
+        <span class="tag t-blue">Python</span>
+        <span class="tag t-orange">Scikit-learn</span>
+        <span class="tag t-blue">Pandas</span>
+        <span class="tag t-orange">Regression</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Anant00785" target="_blank" class="card-link">VIEW CODE →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SKILLS
+══════════════════════════════ -->
+<section id="skills" class="section">
+  <div class="section-header">
+    <span class="section-tag">MODULE_04</span>
+    <h2 class="section-title" data-text="SKILLS">SKILLS</h2>
+  </div>
+
+  <div class="skills-grid reveal">
+
+    <div class="skill-block">
+      <div class="sb-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        PROGRAMMING
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>C</span><span class="pct blue-text">82%</span></div>
+        <div class="bar-bg"><div class="bar-fill blue-bar" data-w="82%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>Python</span><span class="pct blue-text">88%</span></div>
+        <div class="bar-bg"><div class="bar-fill blue-bar" data-w="88%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>JavaScript</span><span class="pct blue-text">85%</span></div>
+        <div class="bar-bg"><div class="bar-fill blue-bar" data-w="85%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="sb-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        FRONTEND
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>HTML & CSS</span><span class="pct orange-text">95%</span></div>
+        <div class="bar-bg"><div class="bar-fill orange-bar" data-w="95%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>React.js</span><span class="pct orange-text">82%</span></div>
+        <div class="bar-bg"><div class="bar-fill orange-bar" data-w="82%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>Responsive Design</span><span class="pct orange-text">90%</span></div>
+        <div class="bar-bg"><div class="bar-fill orange-bar" data-w="90%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="sb-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        AI / ML
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>NumPy</span><span class="pct blue-text">80%</span></div>
+        <div class="bar-bg"><div class="bar-fill blue-bar" data-w="80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>Pandas</span><span class="pct blue-text">78%</span></div>
+        <div class="bar-bg"><div class="bar-fill blue-bar" data-w="78%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>Scikit-learn</span><span class="pct blue-text">72%</span></div>
+        <div class="bar-bg"><div class="bar-fill blue-bar" data-w="72%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="sb-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        TOOLS
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>Git & GitHub</span><span class="pct orange-text">85%</span></div>
+        <div class="bar-bg"><div class="bar-fill orange-bar" data-w="85%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>VS Code</span><span class="pct orange-text">95%</span></div>
+        <div class="bar-bg"><div class="bar-fill orange-bar" data-w="95%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="sm"><span>Hosting / SSL / Deploy</span><span class="pct orange-text">78%</span></div>
+        <div class="bar-bg"><div class="bar-fill orange-bar" data-w="78%"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     ROADMAP
+══════════════════════════════ -->
+<section id="roadmap" class="section">
+  <div class="section-header">
+    <span class="section-tag">MODULE_05</span>
+    <h2 class="section-title" data-text="ROADMAP">ROADMAP</h2>
+    <p class="section-subdesc">Currently Exploring &amp; Future Goals</p>
+  </div>
+
+  <div class="roadmap-grid">
+
+    <!-- Card 1: Currently Learning -->
+    <div class="rm-card rm-learning reveal">
+      <div class="rm-card-bg"></div>
+      <div class="rm-header">
+        <div class="rm-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div class="rm-badge badge-pulse">IN PROGRESS</div>
+          <h3 class="rm-title">Currently Learning</h3>
+        </div>
+      </div>
+      <ul class="rm-list">
+        <li class="rm-item">
+          <div class="rm-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div>
+            <span class="rm-name">Advanced Frontend &amp; MERN Stack</span>
+            <div class="rm-progress-wrap">
+              <div class="rm-bar"><div class="rm-fill" style="width:55%"></div></div>
+              <span class="rm-pct">55%</span>
+            </div>
+          </div>
+        </li>
+        <li class="rm-item">
+          <div class="rm-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div>
+            <span class="rm-name">AI &amp; Machine Learning (Deep)</span>
+            <div class="rm-progress-wrap">
+              <div class="rm-bar"><div class="rm-fill" style="width:45%"></div></div>
+              <span class="rm-pct">45%</span>
+            </div>
+          </div>
+        </li>
+        <li class="rm-item">
+          <div class="rm-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <div>
+            <span class="rm-name">RAG (Retrieval-Augmented Generation)</span>
+            <div class="rm-progress-wrap">
+              <div class="rm-bar"><div class="rm-fill" style="width:30%"></div></div>
+              <span class="rm-pct">30%</span>
+            </div>
+          </div>
+        </li>
+        <li class="rm-item">
+          <div class="rm-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 012 2 2 2 0 01-2 2 2 2 0 01-2-2 2 2 0 012-2zm0 16a2 2 0 012 2 2 2 0 01-2 2 2 2 0 01-2-2 2 2 0 012-2zm8-8a2 2 0 012 2 2 2 0 01-2 2 2 2 0 01-2-2 2 2 0 012-2zM4 12a2 2 0 012 2 2 2 0 01-2 2 2 2 0 01-2-2 2 2 0 012-2z"/><path d="M14 4.27L20 8.5M14 19.73L20 15.5M10 4.27L4 8.5M10 19.73L4 15.5"/></svg>
+          </div>
+          <div>
+            <span class="rm-name">AI Agents &amp; Automation Systems</span>
+            <div class="rm-progress-wrap">
+              <div class="rm-bar"><div class="rm-fill" style="width:25%"></div></div>
+              <span class="rm-pct">25%</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Card 2: Upcoming Focus -->
+    <div class="rm-card rm-upcoming reveal" style="--delay:0.18s">
+      <div class="rm-card-bg"></div>
+      <div class="rm-header">
+        <div class="rm-icon orange-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div>
+          <div class="rm-badge badge-upcoming">UPCOMING</div>
+          <h3 class="rm-title">Upcoming Focus</h3>
+        </div>
+      </div>
+      <ul class="rm-focus-list">
+        <li>
+          <span class="focus-dot orange-dot-sm"></span>
+          <div>
+            <span class="focus-title">Full MERN Stack Applications</span>
+            <span class="focus-desc">End-to-end products with MongoDB, Express, React, Node</span>
+          </div>
+        </li>
+        <li>
+          <span class="focus-dot orange-dot-sm"></span>
+          <div>
+            <span class="focus-title">AI-Powered Tools &amp; Assistants</span>
+            <span class="focus-desc">Smart automation and intelligent UI systems</span>
+          </div>
+        </li>
+        <li>
+          <span class="focus-dot orange-dot-sm"></span>
+          <div>
+            <span class="focus-title">RAG-Based Intelligent Systems</span>
+            <span class="focus-desc">Context-aware AI pipelines using vector search</span>
+          </div>
+        </li>
+        <li>
+          <span class="focus-dot orange-dot-sm"></span>
+          <div>
+            <span class="focus-title">Robotics &amp; Hardware Integration</span>
+            <span class="focus-desc">Bridging software AI with physical systems</span>
+          </div>
+        </li>
+        <li>
+          <span class="focus-dot orange-dot-sm"></span>
+          <div>
+            <span class="focus-title">Open Source Contributions</span>
+            <span class="focus-desc">GitHub collaborations and community projects</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Card 3: Vision -->
+    <div class="rm-card rm-vision reveal" style="--delay:0.36s">
+      <div class="rm-card-bg"></div>
+      <div class="rm-header">
+        <div class="rm-icon vision-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+        </div>
+        <div>
+          <div class="rm-badge badge-vision">VISION</div>
+          <h3 class="rm-title">The End Goal</h3>
+        </div>
+      </div>
+      <div class="vision-statements">
+        <div class="vision-item">
+          <div class="vision-num">01</div>
+          <p>Build intelligent systems that combine <strong class="text-blue">AI, automation, and real-world applications</strong> to solve meaningful problems.</p>
+        </div>
+        <div class="vision-item">
+          <div class="vision-num">02</div>
+          <p>Create <strong class="text-orange">impactful projects</strong> that go beyond portfolios — products people actually use and rely on.</p>
+        </div>
+        <div class="vision-item">
+          <div class="vision-num">03</div>
+          <p>Grow into a <strong class="text-blue">Full-Stack Developer + AI Engineer</strong> who ships production-ready, scalable solutions.</p>
+        </div>
+      </div>
+      <div class="vision-footer">
+        <span class="text-orange">"Code. Build. Iterate. Impact."</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CONTACT
+══════════════════════════════ -->
+<section id="contact" class="section">
+  <div class="section-header">
+    <span class="section-tag">MODULE_05</span>
+    <h2 class="section-title" data-text="CONTACT">CONTACT</h2>
+  </div>
+  <div class="contact-grid reveal">
+    <div class="contact-form-wrap">
+      <form class="contact-form" id="contactForm">
+        <div class="field-group">
+          <input type="text" id="fname" required placeholder=" "/>
+          <label for="fname">IDENTIFIER (NAME)</label>
+          <div class="field-line"></div>
+        </div>
+        <div class="field-group">
+          <input type="email" id="femail" required placeholder=" "/>
+          <label for="femail">FREQ CHANNEL (EMAIL)</label>
+          <div class="field-line"></div>
+        </div>
+        <div class="field-group">
+          <textarea id="fmsg" rows="5" required placeholder=" "></textarea>
+          <label for="fmsg">TRANSMISSION CONTENT</label>
+          <div class="field-line"></div>
+        </div>
+        <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          SEND TRANSMISSION
+        </button>
+      </form>
+    </div>
+    <div class="contact-channels">
+      <h3 class="channels-title">DIRECT UPLINKS</h3>
+      <div class="channels-list">
+        <a href="https://wa.me/916290542056" target="_blank" class="channel-link ch-wa">
+          <div class="ch-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+          <div class="ch-info"><span class="ch-name">WhatsApp</span><span class="ch-handle">+91 6290542056</span></div>
+          <svg class="ch-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/anant-kumar-tanti-8a0420316" target="_blank" class="channel-link ch-li">
+          <div class="ch-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+          <div class="ch-info"><span class="ch-name">LinkedIn</span><span class="ch-handle">anant-kumar-tanti</span></div>
+          <svg class="ch-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://instagram.com/anant00785" target="_blank" class="channel-link ch-ig">
+          <div class="ch-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+          <div class="ch-info"><span class="ch-name">Instagram</span><span class="ch-handle">@anant00785</span></div>
+          <svg class="ch-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://github.com/Anant00785" target="_blank" class="channel-link ch-gh">
+          <div class="ch-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div>
+          <div class="ch-info"><span class="ch-name">GitHub</span><span class="ch-handle">Anant00785</span></div>
+          <svg class="ch-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AKT<span class="text-orange">.EXE</span></div>
+    <p class="footer-copy">&copy; 2026 Anant Kumar Tanti — All Systems Operational</p>
+    <div class="footer-social">
+      <a href="https://github.com/Anant00785" target="_blank" class="fsoc" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="https://www.linkedin.com/in/anant-kumar-tanti-8a0420316" target="_blank" class="fsoc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a href="https://instagram.com/anant00785" target="_blank" class="fsoc" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
