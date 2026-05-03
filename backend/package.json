@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "J.A.R.V.I.S. AI backend for Anant Kumar Tanti's portfolio",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
@@ -11,7 +12,8 @@
     "@google/generative-ai": "^0.21.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.18.3"
+    "express": "^4.18.3",
+    "groq-sdk": "^1.1.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

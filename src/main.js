@@ -180,7 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const jpSend       = document.getElementById('jpSend');
   const jpCmds       = document.querySelectorAll('.jp-cmd');
 
+  // Backend URL — update this to your deployed backend URL in production
+  const BACKEND_URL = 'http://localhost:3000';
+  const sessionId = Math.random().toString(36).slice(2);
+
   let jarvisOpened = false;
+  let isThinking   = false;
 
   function jarvisMsg(text, isUser = false) {
     const p = document.createElement('p');
@@ -188,51 +193,81 @@ document.addEventListener('DOMContentLoaded', () => {
     p.textContent = isUser ? `> ${text}` : `J: ${text}`;
     jpOutput.appendChild(p);
     jpOutput.scrollTop = jpOutput.scrollHeight;
+    return p;
+  }
+
+  function jarvisThinking() {
+    const p = document.createElement('p');
+    p.classList.add('jp-msg', 'jarvis-msg');
+    p.id = 'jarvisThinking';
+    p.textContent = 'J: ...';
+    p.style.opacity = '0.5';
+    jpOutput.appendChild(p);
+    jpOutput.scrollTop = jpOutput.scrollHeight;
+  }
+
+  function removeThinking() {
+    document.getElementById('jarvisThinking')?.remove();
   }
 
   function jarvisGreet() {
     if (jarvisOpened) return;
     jarvisOpened = true;
     const msgs = [
-      'Good evening. I\'m J.A.R.V.I.S.',
+      'Good day. I\'m J.A.R.V.I.S.',
       'Welcome to Anant Kumar Tanti\'s portfolio.',
-      'Co-Founder of Infosventra | CSE @ NIT Kolkata.',
-      'Type a section name or use the buttons below.'
+      'I\'m powered by Groq AI — ask me anything about Anant, his projects, skills, or experience.',
     ];
     msgs.forEach((m, i) => setTimeout(() => jarvisMsg(m), i * 800));
   }
 
-  const jarvisKB = {
-    about:      'Navigating to About section...',
-    hero:       'Taking you back to the beginning.',
-    experience: 'Loading experience timeline...',
-    projects:   'Opening projects directory...',
-    skills:     'Pulling up capability matrix...',
-    contact:    'Opening communication channels...',
-    infosventra:'Infosventra — Co-founded by Anant. Helps businesses go digital with UI, dev, hosting & SSL.',
-    who:        'Anant Kumar Tanti — Frontend Dev, AI/ML Enthusiast, B.Tech CSE @ NIT, Co-Founder @ Infosventra.',
-    github:     'GitHub: github.com/Anant00785 — check it out!',
-    linkedin:   'LinkedIn: linkedin.com/in/anant-kumar-tanti-8a0420316',
-  };
+  function parseNavAndClean(text) {
+    const match = text.match(/\[NAVIGATE:(\w+)\]/);
+    const sectionId = match ? match[1] : null;
+    const cleanText = text.replace(/\[NAVIGATE:\w+\]/g, '').trim();
+    return { cleanText, sectionId };
+  }
 
-  function handleJarvisInput(raw) {
-    const q = raw.trim().toLowerCase();
-    if (!q) return;
-    jarvisMsg(raw, true);
-    let replied = false;
-    for (const [key, resp] of Object.entries(jarvisKB)) {
-      if (q.includes(key)) {
-        setTimeout(() => {
-          jarvisMsg(resp);
-          const secId = ['about','hero','experience','projects','skills','contact'].find(s => q.includes(s));
-          if (secId) document.getElementById(secId)?.scrollIntoView({ behavior:'smooth' });
-        }, 400);
-        replied = true;
-        break;
+  async function handleJarvisInput(raw) {
+    const q = raw.trim();
+    if (!q || isThinking) return;
+
+    isThinking = true;
+    jpSend.disabled = true;
+    jpInput.disabled = true;
+
+    jarvisMsg(q, true);
+    jarvisThinking();
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: q, sessionId }),
+      });
+
+      const data = await res.json();
+      removeThinking();
+
+      if (data.error) {
+        jarvisMsg('Systems error. Backend may be offline. Run: cd backend && npm start');
+      } else {
+        const { cleanText, sectionId } = parseNavAndClean(data.reply);
+        jarvisMsg(cleanText);
+        if (sectionId) {
+          setTimeout(() => {
+            document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+          }, 600);
+        }
       }
-    }
-    if (!replied) {
-      setTimeout(() => jarvisMsg('I\'m not sure about that. Try: about, projects, skills, experience, contact.'), 400);
+    } catch (err) {
+      removeThinking();
+      jarvisMsg('Unable to reach AI systems. Make sure the backend is running on port 3000.');
+    } finally {
+      isThinking = false;
+      jpSend.disabled = false;
+      jpInput.disabled = false;
+      jpInput.focus();
     }
   }
 
@@ -251,8 +286,9 @@ document.addEventListener('DOMContentLoaded', () => {
   jpCmds.forEach(btn => {
     btn.addEventListener('click', () => {
       const sec = btn.dataset.section;
-      jarvisMsg(jarvisKB[sec] || `Navigating to ${sec}...`);
-      document.getElementById(sec)?.scrollIntoView({ behavior:'smooth' });
+      const label = btn.textContent.toLowerCase();
+      handleJarvisInput(`Tell me about the ${label} section`);
+      document.getElementById(sec)?.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
