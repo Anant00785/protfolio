@@ -180,9 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const jpSend       = document.getElementById('jpSend');
   const jpCmds       = document.querySelectorAll('.jp-cmd');
 
-  // Backend URL — update this to your deployed backend URL in production
-  const BACKEND_URL = 'http://localhost:3000';
-  const sessionId = Math.random().toString(36).slice(2);
+  // Relative URL — works on Vercel (serverless) and local (vite dev proxy)
+  const BACKEND_URL = '';
+  const chatHistory = []; // client-side history for serverless context
 
   let jarvisOpened = false;
   let isThinking   = false;
@@ -243,17 +243,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(`${BACKEND_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: q, sessionId }),
+        body: JSON.stringify({ message: q, history: chatHistory }),
       });
 
       const data = await res.json();
       removeThinking();
 
       if (data.error) {
-        jarvisMsg('Systems error. Backend may be offline. Run: cd backend && npm start');
+        jarvisMsg('Systems error. Please try again shortly.');
       } else {
         const { cleanText, sectionId } = parseNavAndClean(data.reply);
         jarvisMsg(cleanText);
+        // Save to history for next request
+        chatHistory.push({ role: 'user', content: q });
+        chatHistory.push({ role: 'assistant', content: cleanText });
+        // Keep history to last 10 exchanges
+        if (chatHistory.length > 20) chatHistory.splice(0, 2);
         if (sectionId) {
           setTimeout(() => {
             document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
